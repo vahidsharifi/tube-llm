@@ -1,4 +1,5 @@
 from langchain.document_loaders import WebBaseLoader
+from langchain.document_loaders import YoutubeLoader
 from langchain.schema.document import Document
 from typing import List
 
@@ -14,9 +15,8 @@ class Loader:
         self.data = self.loader.load()
         return self.data
 
-
-if __name__ == "__main__":
-    l = Loader()
-    d = l.load_from_url()
-    print(d)
-    print(type(d[0]))
+    def load_from_youtube(self, video_id: str = "Unzc731iCUY"
+                          ) -> List[Document]:
+        self.loader = YoutubeLoader(video_id=video_id)
+        self.data = self.loader.load()
+        return self.data

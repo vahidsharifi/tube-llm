@@ -7,11 +7,16 @@ from src import Retrieval, QuestionAnswering
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     LINK = "https://docs.subconscious.ai/"
-    QUESTION = "How subconscious.ai works ?"
+    VIDEO_ID = "Unzc731iCUY"
+    QUESTION = "What is this video about?"
 
     # Load, Split, Store
     loader = Loader()
-    data = loader.load_from_url(url=LINK)
+
+    # Load a web page
+    # data = loader.load_from_url(url=LINK)
+    data = loader.load_from_youtube(video_id=VIDEO_ID)
+    print(data)
     # print(data)
 
     split = Split()
