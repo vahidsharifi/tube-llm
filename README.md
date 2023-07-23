@@ -1,2 +1,3 @@
-# lc_qa_chat
+# LangChain Product Builder
+[LangChain Docs](https://python.langchain.com/docs/get_started)
 
