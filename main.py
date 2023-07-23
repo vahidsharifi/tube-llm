@@ -8,15 +8,18 @@ from src import Retrieval, QuestionAnswering
 if __name__ == '__main__':
     LINK = "https://docs.subconscious.ai/"
     VIDEO_ID = "Unzc731iCUY"
-    QUESTION = "What is this video about?"
+    QUERY_ARVIX = "research trends on large language models"
+    QUESTION = "What are the research trends in LLMs?"
 
     # Load, Split, Store
     loader = Loader()
 
     # Load a web page
     # data = loader.load_from_url(url=LINK)
-    data = loader.load_from_youtube(video_id=VIDEO_ID)
-    print(data)
+    # data = loader.load_from_youtube(video_id=VIDEO_ID)
+    data = loader.load_from_arxiv(query=QUERY_ARVIX, load_max_docs=5)
+    print(f"{len(data)} DOCUMENTS LOADED")
+    # print(data)
     # print(data)
 
     split = Split()
