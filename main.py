@@ -16,8 +16,8 @@ if __name__ == '__main__':
 
     # Load a web page
     # data = loader.load_from_url(url=LINK)
-    # data = loader.load_from_youtube(video_id=VIDEO_ID)
-    data = loader.load_from_arxiv(query=QUERY, load_max_docs=5)
+    data = loader.load_from_youtube(video_id=VIDEO_ID, query=QUESTION)
+    # data = loader.load_from_arxiv(query=QUERY, load_max_docs=5)
     # data = loader.load_from_wikipedia(query=QUERY, load_max_docs=5)
     print(f"{len(data)} DOCUMENTS LOADED")
     # print(data)

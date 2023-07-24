@@ -2,7 +2,9 @@ from langchain.document_loaders import WebBaseLoader
 from langchain.document_loaders import YoutubeLoader
 from langchain.document_loaders import ArxivLoader
 from langchain.document_loaders import WikipediaLoader
+from langchain.tools import YouTubeSearchTool
 from langchain.schema.document import Document
+import ast
 from typing import List
 
 
@@ -17,10 +19,19 @@ class Loader:
         self.data = self.loader.load()
         return self.data
 
-    def load_from_youtube(self, video_id: str = "Unzc731iCUY",
+    def load_from_youtube(self, video_id: str = "Unzc731iCUY", 
+                          query: str = None, num_videos: int = 3,
                           **kwargs) -> List[Document]:
-        self.loader = YoutubeLoader(video_id=video_id, **kwargs)
-        self.data = self.loader.load()
+        if query is not None:
+            tool = YouTubeSearchTool()
+            urls = ast.literal_eval(tool.run(query + f" , {num_videos}"))
+            self.data = []
+            for url in urls:
+                loader = YoutubeLoader.from_youtube_url("https://www.youtube.com" + url)
+                self.data.extend(loader.load())
+        else:
+            self.loader = YoutubeLoader(video_id=video_id, **kwargs)
+            self.data = self.loader.load()
         return self.data
 
     def load_from_arxiv(self, query: str,
