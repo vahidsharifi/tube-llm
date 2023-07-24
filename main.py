@@ -1,8 +1,8 @@
 """
 It takes input of a link and answers any question.
 """
-from src import Loader, Split, Store
-from src import Retrieval, QuestionAnswering
+from src import Loader, Transformer, Store, Retriever
+from src import QuestionAnswering
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -11,10 +11,8 @@ if __name__ == '__main__':
     QUERY = "research trends on large language models"
     QUESTION = "What are the research trends in LLMs?"
 
-    # Load, Split, Store
+    # Load, Transform, Store, Retrieve
     loader = Loader()
-
-    # Load a web page
     # data = loader.load_from_url(url=LINK)
     # data = loader.load_from_youtube(video_id=VIDEO_ID)
     data = loader.load_from_youtube(query=QUESTION)
@@ -24,7 +22,7 @@ if __name__ == '__main__':
     # print(data)
     # print(data)
 
-    split = Split()
+    split = Transformer()
     data_splits = split.split_data(data)
     # print(data_splits)
 
@@ -33,7 +31,7 @@ if __name__ == '__main__':
     # print(vectore_store)
 
     # Retrieval
-    ret = Retrieval(vectore_store=vectore_store)
+    ret = Retriever(vectore_store=vectore_store)
     documents = ret.get_similar_docs(question=QUESTION)
     # print(documents)
 

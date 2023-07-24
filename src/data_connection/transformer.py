@@ -3,7 +3,7 @@ from langchain.schema.document import Document
 from typing import List
 
 
-class Split:
+class Transformer:
     def __init__(self):
         self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0)
 

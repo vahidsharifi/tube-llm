@@ -1,4 +1,4 @@
-class Retrieval:
+class Retriever:
     def __init__(self, vectore_store):
         self.vectore_store = vectore_store
 
