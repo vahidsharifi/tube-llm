@@ -19,6 +19,7 @@ class QuestionAnswering:
     def ask(self, question):
         qa_chain = RetrievalQA.from_chain_type(self.llm,
                                                retriever=self.vector_store.as_retriever(),
-                                               chain_type_kwargs={"prompt": QA_CHAIN_PROMPT})
+                                               chain_type_kwargs={"prompt": QA_CHAIN_PROMPT},
+                                               return_source_documents=True)
 
         return qa_chain({"query": question})

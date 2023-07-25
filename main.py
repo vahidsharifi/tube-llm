@@ -39,3 +39,8 @@ if __name__ == '__main__':
     qa = QuestionAnswering(vector_store=vectore_store)
     answer_results = qa.ask(question=QUESTION)
     print(answer_results['result'])
+    # print(answer_results)
+
+
+    # # Printing source videos for youtube search engine
+    # print(*set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']), sep='\n')
