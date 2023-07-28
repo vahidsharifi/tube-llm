@@ -9,7 +9,7 @@ if __name__ == '__main__':
     LINK = "https://docs.subconscious.ai/"
     VIDEO_ID = "Unzc731iCUY"
     QUERY = "research trends on large language models"
-    QUESTION = "What are the research trends in LLMs?"
+    QUESTION = "What is the difference between literature review and methodology?"
 
     # Load, Transform, Store, Retrieve
     loader = Loader()
@@ -35,12 +35,13 @@ if __name__ == '__main__':
     documents = ret.get_similar_docs(question=QUESTION)
     # print(documents)
 
-    # Question Answering
+    # # General Question Answering
+    # qa = QuestionAnswering(vector_store=vectore_store)
+    # answer_results = qa.ask(question=QUESTION)
+    # print(answer_results['result'])
+
+    # # Youtube Question Answering 
     qa = QuestionAnswering(vector_store=vectore_store)
     answer_results = qa.ask(question=QUESTION)
     print(answer_results['result'])
-    # print(answer_results)
-
-
-    # # Printing source videos for youtube search engine
-    # print(*set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']), sep='\n')
+    print(*set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']), sep='\n')

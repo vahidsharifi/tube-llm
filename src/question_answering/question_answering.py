@@ -1,5 +1,5 @@
 from langchain.chat_models import ChatOpenAI
-from langchain.chains import RetrievalQA
+from langchain.chains import RetrievalQA, RetrievalQAWithSourcesChain
 from langchain.prompts import PromptTemplate
 
 template = """Use the following pieces of context to answer the question at the end. 
