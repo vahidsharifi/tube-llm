@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from typing import List
 import wandb
+import json
 
 # Import your existing classes and functions here
 from src import Loader, Transformer, Store, Retriever
@@ -53,11 +54,11 @@ async def answer_question(question: str):
     response = {
         "question": QUESTION,
         "answer": answer_results['result'],
-        "sources": set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents'])
+        "sources": list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))
     }
-
-    # Log the results
-    wandb.log({"question": QUESTION, "answer": answer_results['result']})
     
+    # Log the results
+    response = json.dumps(response)
+    wandb.log({'my_dic':response})
 
     return response
