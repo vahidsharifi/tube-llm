@@ -5,3 +5,8 @@ class Retriever:
     def get_similar_docs(self, question: str = "What are the approaches to Task Decomposition?"):
         self.documents = self.vectore_store.similarity_search(question)
         return self.documents
+    
+    def get_multi_quer():
+        pass
+
+    
