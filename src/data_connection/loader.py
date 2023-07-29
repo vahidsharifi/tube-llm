@@ -20,7 +20,7 @@ class Loader:
         return self.data
 
     def load_from_youtube(self, video_id: str = "Unzc731iCUY", 
-                          query: str = None, num_videos: int = 5,
+                          query: str = None, num_videos: int = 3,
                           **kwargs) -> List[Document]:
         if query is not None:
             tool = YouTubeSearchTool()

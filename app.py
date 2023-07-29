@@ -59,4 +59,5 @@ async def answer_question(question: str):
     # Log the results
     wandb.log({"question": QUESTION, "answer": answer_results['result']})
     
+
     return response
