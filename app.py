@@ -3,13 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from typing import List
 import wandb
-import json
 
 # Import your existing classes and functions here
 from src import Loader, Transformer, Store, Retriever
 from src import QuestionAnswering
 
-wandb.init(project="tube-llm", entity="vahidsharifi")
+run = wandb.init(project="tube-llm", entity="vahidsharifi")
 
 # Create an instance of the FastAPI app
 app = FastAPI()
@@ -52,13 +51,16 @@ async def answer_question(question: str):
 
     # Return the results as JSON
     response = {
-        "question": QUESTION,
-        "answer": answer_results['result'],
-        "sources": list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))
+        "question": [QUESTION],
+        "answer": [answer_results['result']],
+        "sources": [", ".join(list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents'])))]
     }
-    
+    import pandas as pd
+    df = pd.DataFrame(response)
+    print("Response: ", response)
     # Log the results
-    response = json.dumps(response)
-    wandb.log({'my_dic':response})
+    # wandb.log({'my_dic':response})
+    my_table = wandb.Table(dataframe=df)
+    run.log({f"{question[:20]}": my_table})
 
     return response
