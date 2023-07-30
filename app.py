@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from typing import List
 import wandb
+import datetime
 
 # Import your existing classes and functions here
 from src import Loader, Transformer, Store, Retriever
@@ -57,10 +58,10 @@ async def answer_question(question: str):
     }
     import pandas as pd
     df = pd.DataFrame(response)
-    print("Response: ", response)
+    # print("Response: ", response)
     # Log the results
     # wandb.log({'my_dic':response})
     my_table = wandb.Table(dataframe=df)
-    run.log({f"{question[:20]}": my_table})
+    run.log({f"{datetime.now()}": my_table})
 
     return response
