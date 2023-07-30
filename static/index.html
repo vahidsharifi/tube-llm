@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Question Answering App</title>
+    <title>Tube-LLM</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Question Answering App</h1>
+    <h1>Tube-LLM</h1>
+    <p id="description">Welcome to our innovative search engine. Simply input your question below and our system will return detailed answers curated from various YouTube sources. You'll also receive links to the original YouTube videos for further exploration. Enhance your knowledge with ease and convenience, all in one place.</p>
     <div>
         <form onsubmit="submitQuestion(event)">
             <label for="question">Enter your question:</label>
@@ -22,44 +24,7 @@
     </div>
 
     <script>
-        function submitQuestion(event) {
-            event.preventDefault();
-            const question = document.getElementById('question').value;
-            getAnswer(question);
-        }
-
-        function getAnswer(question) {
-            fetch(`/answer/?question=${encodeURIComponent(question)}`)
-                .then(response => response.json())
-                .then(data => {
-                    const answerElement = document.getElementById('answer');
-                    answerElement.textContent = data.answer;
-
-                    const sourcesElement = document.getElementById('sources');
-                    sourcesElement.innerHTML = ""; // Clear existing sources
-
-                    // Display sources as list items in the <ul> element
-                    data.sources.forEach(source => {
-                        const listItem = document.createElement('li');
-                        const link = document.createElement('a');
-                        link.href = source;
-                        link.textContent = source;
-                        listItem.appendChild(link);
-                        sourcesElement.appendChild(listItem);
-                    });
-
-                    // Show the "Answer:" and "Sources:" sections
-                    const answerSection = document.getElementById('answerSection');
-                    const sourcesSection = document.getElementById('sourcesSection');
-                    answerSection.style.display = 'block';
-                    sourcesSection.style.display = 'block';
-                })
-                .catch(error => {
-                    console.error('Error fetching answer:', error);
-                    const answerElement = document.getElementById('answer');
-                    answerElement.textContent = 'Error fetching answer. Please try again later.';
-                });
-        }
+        /* Your JavaScript code here... */
     </script>
 </body>
 </html>

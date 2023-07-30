@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from typing import List
 import wandb
 import datetime
@@ -17,6 +18,9 @@ app = FastAPI()
 # Configure CORS to allow requests from the frontend (replace * with your frontend URL)
 origins = ["*"]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["*"], allow_headers=["*"])
+
+# Mount the static files directory
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Define a route to serve the index.html file
 @app.get("/", response_class=HTMLResponse)
