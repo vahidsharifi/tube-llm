@@ -12,7 +12,7 @@ from src import QuestionAnswering
 run = wandb.init(project="tube-llm", entity="vahidsharifi")
 
 # Create an instance of the FastAPI app
-app = FastAPI()
+app = FastAPI(host="0.0.0.0", port=8080)
 
 # Configure CORS to allow requests from the frontend (replace * with your frontend URL)
 origins = ["*"]
