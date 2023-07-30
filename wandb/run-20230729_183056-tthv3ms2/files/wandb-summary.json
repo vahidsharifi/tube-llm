@@ -1,1 +1,0 @@
-{"question": "how to fine-tune llama-2?", "answer": "To fine-tune llama-2, you can use Q Laura to train the model on a custom dataset. Once the fine-tuning is complete, you can push the model to the Hugging Face Model Hub.", "_timestamp": 1690651865.5059268, "_runtime": 8.785377740859985, "_step": 0, "_wandb": {"runtime": 23}}
