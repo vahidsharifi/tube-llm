@@ -62,6 +62,6 @@ async def answer_question(question: str):
     # Log the results
     # wandb.log({'my_dic':response})
     my_table = wandb.Table(dataframe=df)
-    run.log({f"{datetime.now()}": my_table})
+    run.log({f"{datetime.datetime.now()}": my_table})
 
     return response
