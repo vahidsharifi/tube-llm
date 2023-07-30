@@ -1,0 +1,27 @@
+# Mac generated files
+.DS_Store
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual Environment directory
+venv/
+
+# Ignore git directory
+.git/
+
+# Ignore logs or other temporary files
+*.log
+.tmp/
+
+# Ignore build and distribution directories for Python projects
+build/
+dist/
+*.egg-info/
+
+# Ignore wandb
+wandb/
