@@ -1,0 +1,1 @@
+{"columns": ["question", "answer", "sources"], "data": [["What is the best way to fine-tune llama-2", "The best way to fine-tune llama-2 is by using Q Laura and ultimately pushing the model to the hugging face model Hub.", "https://www.youtube.com/watch?v=eeM6V5aPjhk, https://www.youtube.com/watch?v=o5bU1H-6TqM, https://www.youtube.com/watch?v=3fsn19OI_C8"]]}

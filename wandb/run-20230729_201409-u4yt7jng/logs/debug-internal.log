@@ -1,0 +1,203 @@
+2023-07-29 20:14:09,630 INFO    StreamThr :94627 [internal.py:wandb_internal():86] W&B internal server running at pid: 94627, started at: 2023-07-29 20:14:09.629497
+2023-07-29 20:14:09,632 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status
+2023-07-29 20:14:09,645 INFO    WriterThread:94627 [datastore.py:open_for_write():85] open: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/run-u4yt7jng.wandb
+2023-07-29 20:14:09,645 DEBUG   SenderThread:94627 [sender.py:send():379] send: header
+2023-07-29 20:14:09,662 DEBUG   SenderThread:94627 [sender.py:send():379] send: run
+2023-07-29 20:14:10,268 INFO    SenderThread:94627 [dir_watcher.py:__init__():211] watching files in: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files
+2023-07-29 20:14:10,268 INFO    SenderThread:94627 [sender.py:_start_run_threads():1122] run started: u4yt7jng with start time 1690658049.637624
+2023-07-29 20:14:10,268 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: summary_record
+2023-07-29 20:14:10,269 INFO    SenderThread:94627 [sender.py:_save_file():1376] saving file wandb-summary.json with policy end
+2023-07-29 20:14:10,277 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: check_version
+2023-07-29 20:14:10,277 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: check_version
+2023-07-29 20:14:10,346 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: run_start
+2023-07-29 20:14:10,355 DEBUG   HandlerThread:94627 [system_info.py:__init__():31] System info init
+2023-07-29 20:14:10,356 DEBUG   HandlerThread:94627 [system_info.py:__init__():46] System info init done
+2023-07-29 20:14:10,356 INFO    HandlerThread:94627 [system_monitor.py:start():181] Starting system monitor
+2023-07-29 20:14:10,356 INFO    SystemMonitor:94627 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2023-07-29 20:14:10,356 INFO    HandlerThread:94627 [system_monitor.py:probe():201] Collecting system info
+2023-07-29 20:14:10,357 DEBUG   HandlerThread:94627 [system_info.py:probe():195] Probing system
+2023-07-29 20:14:10,357 INFO    SystemMonitor:94627 [interfaces.py:start():190] Started cpu monitoring
+2023-07-29 20:14:10,357 INFO    SystemMonitor:94627 [interfaces.py:start():190] Started disk monitoring
+2023-07-29 20:14:10,360 INFO    SystemMonitor:94627 [interfaces.py:start():190] Started gpuapple monitoring
+2023-07-29 20:14:10,363 INFO    SystemMonitor:94627 [interfaces.py:start():190] Started memory monitoring
+2023-07-29 20:14:10,363 INFO    SystemMonitor:94627 [interfaces.py:start():190] Started network monitoring
+2023-07-29 20:14:10,368 DEBUG   HandlerThread:94627 [system_info.py:_probe_git():180] Probing git
+2023-07-29 20:14:10,383 DEBUG   HandlerThread:94627 [system_info.py:_probe_git():188] Probing git done
+2023-07-29 20:14:10,383 DEBUG   HandlerThread:94627 [system_info.py:probe():240] Probing system done
+2023-07-29 20:14:10,383 DEBUG   HandlerThread:94627 [system_monitor.py:probe():210] {'os': 'macOS-13.4.1-arm64-arm-64bit', 'python': '3.11.4', 'heartbeatAt': '2023-07-29T19:14:10.357060', 'startedAt': '2023-07-29T19:14:09.615430', 'docker': None, 'cuda': None, 'args': ('app:app', '--reload'), 'state': 'running', 'program': '/Users/vahid/GitHub/lc_qa_chat/venv/bin/uvicorn', 'codePath': 'venv/bin/uvicorn', 'git': {'remote': 'https://github.com/reachusama/lc_qa_chat.git', 'commit': '34a0354319d2935faef4c8faec3dc291d8e14384'}, 'email': 's4217641@glos.ac.uk', 'root': '/Users/vahid/GitHub/lc_qa_chat', 'host': 'Vahids-MacBook-Air.local', 'username': 'vahid', 'executable': '/Users/vahid/GitHub/lc_qa_chat/venv/bin/python3.11', 'cpu_count': 8, 'cpu_count_logical': 8, 'disk': {'total': 228.27386474609375, 'used': 8.440948486328125}, 'gpuapple': {'type': 'arm', 'vendor': 'Apple'}, 'memory': {'total': 8.0}}
+2023-07-29 20:14:10,383 INFO    HandlerThread:94627 [system_monitor.py:probe():211] Finished collecting system info
+2023-07-29 20:14:10,383 INFO    HandlerThread:94627 [system_monitor.py:probe():214] Publishing system info
+2023-07-29 20:14:10,383 DEBUG   HandlerThread:94627 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-07-29 20:14:10,384 DEBUG   HandlerThread:94627 [system_info.py:_save_pip():67] Saving pip packages done
+2023-07-29 20:14:10,384 INFO    HandlerThread:94627 [system_monitor.py:probe():216] Finished publishing system info
+2023-07-29 20:14:10,387 DEBUG   SenderThread:94627 [sender.py:send():379] send: files
+2023-07-29 20:14:10,387 INFO    SenderThread:94627 [sender.py:_save_file():1376] saving file wandb-metadata.json with policy now
+2023-07-29 20:14:10,390 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: stop_status
+2023-07-29 20:14:10,390 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: stop_status
+2023-07-29 20:14:10,627 DEBUG   SenderThread:94627 [sender.py:send():379] send: telemetry
+2023-07-29 20:14:10,788 INFO    wandb-upload_0:94627 [upload_job.py:push():131] Uploaded file /var/folders/yb/rxg8x13d235dsjs27my4zz6w0000gp/T/tmpsoio_3mgwandb/vp4n8fbj-wandb-metadata.json
+2023-07-29 20:14:11,278 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:14:11,279 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/wandb-metadata.json
+2023-07-29 20:14:11,279 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/requirements.txt
+2023-07-29 20:14:11,279 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_created():272] file/dir created: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/wandb-summary.json
+2023-07-29 20:14:13,286 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:14:14,646 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:16,020 DEBUG   SenderThread:94627 [sender.py:send():379] send: telemetry
+2023-07-29 20:14:18,309 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:14:19,950 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:20,318 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:14:21,324 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:14:24,971 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:25,397 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: stop_status
+2023-07-29 20:14:25,398 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: stop_status
+2023-07-29 20:14:30,565 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:35,584 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:40,399 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: stop_status
+2023-07-29 20:14:40,401 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: stop_status
+2023-07-29 20:14:40,615 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:41,422 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/config.yaml
+2023-07-29 20:14:45,801 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:50,822 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:14:55,404 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: stop_status
+2023-07-29 20:14:55,406 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: stop_status
+2023-07-29 20:14:56,568 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:15:01,591 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:15:06,612 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:15:08,131 DEBUG   SenderThread:94627 [sender.py:send():379] send: exit
+2023-07-29 20:15:08,132 INFO    SenderThread:94627 [sender.py:send_exit():584] handling exit code: 0
+2023-07-29 20:15:08,133 INFO    SenderThread:94627 [sender.py:send_exit():586] handling runtime: 57
+2023-07-29 20:15:08,139 INFO    SenderThread:94627 [sender.py:_save_file():1376] saving file wandb-summary.json with policy end
+2023-07-29 20:15:08,141 INFO    SenderThread:94627 [sender.py:send_exit():592] send defer
+2023-07-29 20:15:08,142 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,142 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 0
+2023-07-29 20:15:08,143 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,143 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 0
+2023-07-29 20:15:08,143 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 1
+2023-07-29 20:15:08,143 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,143 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 1
+2023-07-29 20:15:08,143 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,143 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 1
+2023-07-29 20:15:08,143 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 2
+2023-07-29 20:15:08,143 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,144 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 2
+2023-07-29 20:15:08,144 INFO    HandlerThread:94627 [system_monitor.py:finish():190] Stopping system monitor
+2023-07-29 20:15:08,145 DEBUG   SystemMonitor:94627 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2023-07-29 20:15:08,145 INFO    HandlerThread:94627 [interfaces.py:finish():202] Joined cpu monitor
+2023-07-29 20:15:08,145 DEBUG   SystemMonitor:94627 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2023-07-29 20:15:08,146 INFO    HandlerThread:94627 [interfaces.py:finish():202] Joined disk monitor
+2023-07-29 20:15:08,147 DEBUG   SystemMonitor:94627 [system_monitor.py:_start():170] Publishing last batch of metrics
+2023-07-29 20:15:08,147 INFO    HandlerThread:94627 [interfaces.py:finish():202] Joined gpuapple monitor
+2023-07-29 20:15:08,149 INFO    HandlerThread:94627 [interfaces.py:finish():202] Joined memory monitor
+2023-07-29 20:15:08,149 INFO    HandlerThread:94627 [interfaces.py:finish():202] Joined network monitor
+2023-07-29 20:15:08,150 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,150 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 2
+2023-07-29 20:15:08,150 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 3
+2023-07-29 20:15:08,150 DEBUG   SenderThread:94627 [sender.py:send():379] send: telemetry
+2023-07-29 20:15:08,150 DEBUG   SenderThread:94627 [sender.py:send():379] send: stats
+2023-07-29 20:15:08,152 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,152 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 3
+2023-07-29 20:15:08,152 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,152 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 3
+2023-07-29 20:15:08,152 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 4
+2023-07-29 20:15:08,153 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,153 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 4
+2023-07-29 20:15:08,153 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,153 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 4
+2023-07-29 20:15:08,153 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 5
+2023-07-29 20:15:08,153 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,153 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 5
+2023-07-29 20:15:08,153 DEBUG   SenderThread:94627 [sender.py:send():379] send: summary
+2023-07-29 20:15:08,154 INFO    SenderThread:94627 [sender.py:_save_file():1376] saving file wandb-summary.json with policy end
+2023-07-29 20:15:08,154 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,154 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 5
+2023-07-29 20:15:08,154 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 6
+2023-07-29 20:15:08,154 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,154 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 6
+2023-07-29 20:15:08,154 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,154 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 6
+2023-07-29 20:15:08,161 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: status_report
+2023-07-29 20:15:08,334 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 7
+2023-07-29 20:15:08,335 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:08,335 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 7
+2023-07-29 20:15:08,335 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:08,335 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 7
+2023-07-29 20:15:08,548 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/config.yaml
+2023-07-29 20:15:08,549 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/wandb-summary.json
+2023-07-29 20:15:09,135 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: poll_exit
+2023-07-29 20:15:09,553 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:15:09,890 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 8
+2023-07-29 20:15:09,891 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: poll_exit
+2023-07-29 20:15:09,891 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:09,892 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 8
+2023-07-29 20:15:09,892 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:09,892 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 8
+2023-07-29 20:15:09,892 INFO    SenderThread:94627 [job_builder.py:build():280] Attempting to build job artifact
+2023-07-29 20:15:09,893 INFO    SenderThread:94627 [job_builder.py:_get_source_type():389] is repo sourced job
+2023-07-29 20:15:09,896 INFO    SenderThread:94627 [job_builder.py:build():363] adding wandb-job metadata file
+2023-07-29 20:15:09,901 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 9
+2023-07-29 20:15:09,901 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:09,901 DEBUG   SenderThread:94627 [sender.py:send():379] send: artifact
+2023-07-29 20:15:09,901 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 9
+2023-07-29 20:15:10,137 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: poll_exit
+2023-07-29 20:15:10,559 INFO    Thread-12 :94627 [dir_watcher.py:_on_file_modified():289] file/dir modified: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:15:10,856 INFO    SenderThread:94627 [sender.py:send_artifact():1476] sent artifact job-https___github.com_reachusama_lc_qa_chat.git_venv_bin_uvicorn - {'id': 'QXJ0aWZhY3Q6NTI2NzQ1MTUy', 'digest': 'eb32ba9a561204b1bb81467675c5e9a7', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-https___github.com_reachusama_lc_qa_chat.git_venv_bin_uvicorn', 'alias': 'latest'}, {'artifactCollectionName': 'job-https___github.com_reachusama_lc_qa_chat.git_venv_bin_uvicorn', 'alias': 'v7'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjg2NTI4NDQ1', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NTI2NzQ1MTUy', 'versionIndex': 7}}, 'version': 'v7'}
+2023-07-29 20:15:10,856 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:10,856 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 9
+2023-07-29 20:15:10,857 INFO    SenderThread:94627 [dir_watcher.py:finish():359] shutting down directory watcher
+2023-07-29 20:15:11,565 INFO    SenderThread:94627 [dir_watcher.py:finish():389] scan: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files
+2023-07-29 20:15:11,566 INFO    SenderThread:94627 [dir_watcher.py:finish():403] scan save: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/requirements.txt requirements.txt
+2023-07-29 20:15:11,567 INFO    SenderThread:94627 [dir_watcher.py:finish():403] scan save: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log output.log
+2023-07-29 20:15:11,570 INFO    SenderThread:94627 [dir_watcher.py:finish():403] scan save: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/config.yaml config.yaml
+2023-07-29 20:15:11,574 INFO    SenderThread:94627 [dir_watcher.py:finish():403] scan save: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/wandb-summary.json wandb-summary.json
+2023-07-29 20:15:11,577 INFO    SenderThread:94627 [dir_watcher.py:finish():403] scan save: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/wandb-metadata.json wandb-metadata.json
+2023-07-29 20:15:11,577 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 10
+2023-07-29 20:15:11,578 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: poll_exit
+2023-07-29 20:15:11,578 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:11,578 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 10
+2023-07-29 20:15:11,579 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:11,580 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 10
+2023-07-29 20:15:11,580 INFO    SenderThread:94627 [file_pusher.py:finish():159] shutting down file pusher
+2023-07-29 20:15:11,959 INFO    wandb-upload_1:94627 [upload_job.py:push():131] Uploaded file /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/output.log
+2023-07-29 20:15:12,036 INFO    wandb-upload_0:94627 [upload_job.py:push():131] Uploaded file /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/requirements.txt
+2023-07-29 20:15:12,047 INFO    wandb-upload_2:94627 [upload_job.py:push():131] Uploaded file /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/config.yaml
+2023-07-29 20:15:12,114 INFO    wandb-upload_3:94627 [upload_job.py:push():131] Uploaded file /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/files/wandb-summary.json
+2023-07-29 20:15:12,316 INFO    Thread-11 (_thread_body):94627 [sender.py:transition_state():612] send defer: 11
+2023-07-29 20:15:12,316 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:12,316 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 11
+2023-07-29 20:15:12,316 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:12,316 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 11
+2023-07-29 20:15:12,317 INFO    SenderThread:94627 [file_pusher.py:join():164] waiting for file pusher
+2023-07-29 20:15:12,317 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 12
+2023-07-29 20:15:12,317 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:12,317 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 12
+2023-07-29 20:15:12,317 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:12,317 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 12
+2023-07-29 20:15:12,807 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 13
+2023-07-29 20:15:12,808 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:12,808 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 13
+2023-07-29 20:15:12,808 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:12,808 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 13
+2023-07-29 20:15:12,808 INFO    SenderThread:94627 [sender.py:transition_state():612] send defer: 14
+2023-07-29 20:15:12,809 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: defer
+2023-07-29 20:15:12,809 DEBUG   SenderThread:94627 [sender.py:send():379] send: final
+2023-07-29 20:15:12,809 INFO    HandlerThread:94627 [handler.py:handle_request_defer():170] handle defer: 14
+2023-07-29 20:15:12,809 DEBUG   SenderThread:94627 [sender.py:send():379] send: footer
+2023-07-29 20:15:12,809 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: defer
+2023-07-29 20:15:12,809 INFO    SenderThread:94627 [sender.py:send_request_defer():608] handle sender defer: 14
+2023-07-29 20:15:12,810 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: poll_exit
+2023-07-29 20:15:12,811 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: server_info
+2023-07-29 20:15:12,811 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: get_summary
+2023-07-29 20:15:12,812 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: sampled_history
+2023-07-29 20:15:12,812 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: poll_exit
+2023-07-29 20:15:12,812 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: server_info
+2023-07-29 20:15:12,812 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: job_info
+2023-07-29 20:15:12,943 DEBUG   SenderThread:94627 [sender.py:send_request():406] send_request: job_info
+2023-07-29 20:15:12,944 INFO    MainThread:94627 [wandb_run.py:_footer_history_summary_info():3475] rendering history
+2023-07-29 20:15:12,944 INFO    MainThread:94627 [wandb_run.py:_footer_history_summary_info():3507] rendering summary
+2023-07-29 20:15:12,945 INFO    MainThread:94627 [wandb_run.py:_footer_sync_info():3434] logging synced files
+2023-07-29 20:15:12,946 DEBUG   HandlerThread:94627 [handler.py:handle_request():144] handle_request: shutdown
+2023-07-29 20:15:12,946 INFO    HandlerThread:94627 [handler.py:finish():857] shutting down handler
+2023-07-29 20:15:13,814 INFO    WriterThread:94627 [datastore.py:close():294] close: /Users/vahid/GitHub/lc_qa_chat/wandb/run-20230729_201409-u4yt7jng/run-u4yt7jng.wandb
+2023-07-29 20:15:13,945 INFO    SenderThread:94627 [sender.py:finish():1552] shutting down sender
+2023-07-29 20:15:13,945 INFO    SenderThread:94627 [file_pusher.py:finish():159] shutting down file pusher
+2023-07-29 20:15:13,945 INFO    SenderThread:94627 [file_pusher.py:join():164] waiting for file pusher

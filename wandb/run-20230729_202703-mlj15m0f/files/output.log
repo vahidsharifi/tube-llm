@@ -1,0 +1,20 @@
+[32mINFO[39m:     Started server process [[36m96291[39m]
+[32mINFO[39m:     Waiting for application startup.
+[32mINFO[39m:     Application startup complete.
+3 DOCUMENTS LOADED
+Response:  {'question': ['how to fine-tune llama-2'], 'answer': ["I don't know."], 'sources': ['https://www.youtube.com/watch?v=eeM6V5aPjhk, https://www.youtube.com/watch?v=ThKWQcyQXF8, https://www.youtube.com/watch?v=3fsn19OI_C8']}
+[32mINFO[39m:     127.0.0.1:55007 - "[1mGET /answer/?question=how%20to%20fine-tune%20llama-2 HTTP/1.1[22m" [32m200 OK
+3 DOCUMENTS LOADED
+Response:  {'question': ['What is the best way to fine-tune llama-2'], 'answer': ['The best way to fine-tune llama-2 is by using Q Laura and ultimately pushing the model to the hugging face model Hub.'], 'sources': ['https://www.youtube.com/watch?v=eeM6V5aPjhk, https://www.youtube.com/watch?v=o5bU1H-6TqM, https://www.youtube.com/watch?v=3fsn19OI_C8']}
+[32mINFO[39m:     127.0.0.1:55023 - "[1mGET /answer/?question=What%20is%20the%20best%20way%20to%20fine-tune%20llama-2 HTTP/1.1[22m" [32m200 OK
+[32mINFO[39m:     Shutting down
+[32mINFO[39m:     Finished server process [[36m96291[39m]
+[31mERROR[39m:    Traceback (most recent call last):
+  File "/Users/vahid/GitHub/lc_qa_chat/venv/lib/python3.11/site-packages/starlette/routing.py", line 686, in lifespan
+    await receive()
+  File "/Users/vahid/GitHub/lc_qa_chat/venv/lib/python3.11/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError

@@ -1,0 +1,16 @@
+[32mINFO[39m:     Started server process [[36m96001[39m]
+[32mINFO[39m:     Waiting for application startup.
+[32mINFO[39m:     Application startup complete.
+2 DOCUMENTS LOADED
+Response:  {'question': ['how to fine-tune llama-2'], 'answer': ['To fine-tune llama-2, you need to use Q Laura and push the model to the Hugging Face Model Hub. You can start by showing a quick demo and then proceed to fine-tune llama-2 based on a specific dataset, such as French quotes. After fine-tuning, you can use llama-2 to generate French text. To push the model to the Hugging Face Model Hub, you need to authenticate your notebook with your Hugging Face profile and then paste the access token. Once the model is pushed, it becomes available for use by yourself or others.'], 'sources': ['https://www.youtube.com/watch?v=3fsn19OI_C8, https://www.youtube.com/watch?v=eeM6V5aPjhk']}
+[32mINFO[39m:     127.0.0.1:54924 - "[1mGET /answer/?question=how%20to%20fine-tune%20llama-2 HTTP/1.1[22m" [32m200 OK
+3 DOCUMENTS LOADED
+Response:  {'question': ['how to fine-tune llama-2'], 'answer': ['To fine-tune llama-2, you can use Q Laura to instruct the fine-tuning process. After fine-tuning, you can push the model to the hugging face model Hub, where you can have a repository with the lower adapters for later use. The process involves using a custom dataset in CSV format with three columns: instruction, input, and output. The instruction column provides guidance for the fine-tuning process.'], 'sources': ['https://www.youtube.com/watch?v=3fsn19OI_C8, https://www.youtube.com/watch?v=eeM6V5aPjhk']}
+[32mINFO[39m:     127.0.0.1:54938 - "[1mGET /answer/?question=how%20to%20fine-tune%20llama-2 HTTP/1.1[22m" [32m200 OK
+3 DOCUMENTS LOADED
+Response:  {'question': ['how to fine-tune llama-2'], 'answer': ['To fine-tune llama-2, you can use Q Laura to instruct and ultimately push the model to the hugging face model Hub. You can create a repository in the model Hub and use lower adapters for later use. In this particular example, the fine-tuning is based on French quotes, inspired by a linked tweet and using a dataset credited to the same author. The process involves using a custom dataset in CSV format with three columns: instruction, input, and output.'], 'sources': ['https://www.youtube.com/watch?v=3fsn19OI_C8, https://www.youtube.com/watch?v=eeM6V5aPjhk']}
+[32mINFO[39m:     127.0.0.1:54938 - "[1mGET /answer/?question=how%20to%20fine-tune%20llama-2 HTTP/1.1[22m" [32m200 OK
+[32mINFO[39m:     Shutting down
+[32mINFO[39m:     Waiting for application shutdown.
+[32mINFO[39m:     Application shutdown complete.
+[32mINFO[39m:     Finished server process [[36m96001[39m]
