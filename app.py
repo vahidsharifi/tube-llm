@@ -56,7 +56,7 @@ async def answer_question(question: str):
 
     # Youtube Question Answering
     qa = QuestionAnswering(vector_store=vectore_store)
-    answer_results = qa.ask(question=QUESTION)
+    answer_results = qa.ask(question=question)
     # Your existing code ends here
 
     # Return the results as JSON
@@ -64,7 +64,7 @@ async def answer_question(question: str):
         "question": [question],
         "modified_question": [QUESTION],
         "answer": [answer_results['result']],
-        "sources": [", ".join(list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents'])))]
+        "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
     }
     
     df = pd.DataFrame(response)
