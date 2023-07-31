@@ -5,9 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from typing import List
 import wandb
 import datetime
+import pandas as pd
+
 
 # Import your existing classes and functions here
-from src import Loader, Transformer, Store, Retriever
+from src import Loader, Transformer, Store, Retriever, Chain
 from src import QuestionAnswering
 
 run = wandb.init(project="tube-llm", entity="vahidsharifi")
@@ -31,8 +33,11 @@ async def read_index():
 # Wrap your existing code into a FastAPI route
 @app.get("/answer/")
 async def answer_question(question: str):
-    # Your existing code starts here
-    QUESTION = question
+    print("Received query:", question)
+    chain = Chain()
+    QUESTION = chain.input_query_modifier(question)
+    print("modified query:", QUESTION)
+
 
     # Load, Transform, Store, Retrieve
     loader = Loader()
@@ -56,15 +61,13 @@ async def answer_question(question: str):
 
     # Return the results as JSON
     response = {
-        "question": [QUESTION],
+        "question": [question],
+        "modified_question": [QUESTION],
         "answer": [answer_results['result']],
         "sources": [", ".join(list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents'])))]
     }
-    import pandas as pd
+    
     df = pd.DataFrame(response)
-    # print("Response: ", response)
-    # Log the results
-    # wandb.log({'my_dic':response})
     my_table = wandb.Table(dataframe=df)
     run.log({f"{datetime.datetime.now()}": my_table})
 
