@@ -33,11 +33,11 @@ async def read_index():
 # Wrap your existing code into a FastAPI route
 @app.get("/answer/")
 async def answer_question(question: str):
+
     print("Received query:", question)
     chain = Chain()
     QUESTION = chain.input_query_modifier(question)
     print("modified query:", QUESTION)
-
 
     # Load, Transform, Store, Retrieve
     loader = Loader()
@@ -50,13 +50,25 @@ async def answer_question(question: str):
     store = Store()
     vectore_store = store.store_data(splits=data_splits)
 
-    # Retrieval
-    ret = Retriever(vectore_store=vectore_store)
-    documents = ret.get_similar_docs(question=QUESTION)
 
-    # Youtube Question Answering
-    qa = QuestionAnswering(vector_store=vectore_store)
-    answer_results = qa.ask(question=question)
+    # # Youtube Question Answering Multi Query Retriever
+    # # Retriever
+    # ret = Retriever(vectore_store=vectore_store)
+    # documents = ret.get_multi_query(question=QUESTION)
+    # qa = QuestionAnswering()
+    # answer_results, sources = qa.ask_multi_query(documents=documents, question=question)
+    # # Return the results as JSON
+    # response = {
+    #     "question": [question],
+    #     "modified_question": [QUESTION],
+    #     "answer": [answer_results['output_text']],
+    #     "sources": sources
+    # }
+
+
+    # Youtube Question Answering Simple Retriever
+    qa = QuestionAnswering()
+    answer_results = qa.ask(question=question, vector_store=vectore_store)
     # Your existing code ends here
 
     # Return the results as JSON
@@ -67,6 +79,9 @@ async def answer_question(question: str):
         "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
     }
     
+
+
+
     df = pd.DataFrame(response)
     my_table = wandb.Table(dataframe=df)
     run.log({f"{datetime.datetime.now()}": my_table})
