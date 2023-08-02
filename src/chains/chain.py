@@ -23,6 +23,7 @@ class Chain:
         # Zero shot prompt
         template_2 = """Given the user query: '${query}', generate a concise and\
               effective equivalent query to optimize the search for relevant videos on YouTube.\
+              The modified query should be in the same language with query.
               
               Modified Query:"""
         
