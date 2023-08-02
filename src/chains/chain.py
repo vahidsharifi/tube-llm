@@ -3,6 +3,8 @@ from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 from src import Loader, Transformer
 from langchain.chains.summarize import load_summarize_chain
+import ast
+
 
 
 class Chain:
@@ -22,20 +24,21 @@ class Chain:
                               Modified Query: """
         # Zero shot prompt
         template_2 = """Given the user query: '${query}', generate a concise and\
-              effective equivalent query to optimize the search for relevant videos on YouTube.\
-              The modified query should be in the same language with query.
+              effective equivalent query in the same language to optimize the search for relevant videos on YouTube.\
               
               Modified Query:"""
         
 
         # Zero shot prompt
-        template_3 = """Given the user query: '${query}', generate five concise and\
+        template_3 = """Given the user query: '${query}', generate three concise and\
               effective equivalent query to optimize the search for relevant videos on YouTube.\
-              You should return them in a json format containing. The keys are numbers from one to five.
+              You should return them in a json format. The keys are numbers from one to three.\
+
+              The modified query should be in the same language with query.
               
               Modified Query:"""
         
-        template_4="""You are an AI language model assistant. Your task is 
+        template_4 = """You are an AI language model assistant. Your task is 
                 to generate 3 different versions of the given user 
                 question to retrieve relevant documents from a vector  database. 
                 By generating multiple perspectives on the user question, 
@@ -46,7 +49,31 @@ class Chain:
         self.prompt = ChatPromptTemplate.from_template(template_2)
         self.llm = ChatOpenAI(temperature=0.0)
         chain = LLMChain(llm=self.llm, prompt=self.prompt)
-        return chain.run(query).replace(",", " ") #Replacing the comma with spaces due to YouTubeSearchTool documentation
+        return [chain.run(query).replace(",", " ")] #Replacing the comma with spaces due to YouTubeSearchTool documentation
+
+    def input_query_modifier_multi(self, query: str = "How to fine-tune an llm with limited resources?",
+                             **kwargs) -> dict:
+        template_1 = """Given the user query: '${query}', generate three concise and\
+              effective equivalent query in the same language to optimize the search for relevant videos on YouTube.\
+              You should return them in a json format. The keys are numbers from one to three.\
+
+              Modified Query:"""
+
+        template_2 = """You are an AI language model assistant. Your task is 
+                to generate 3 different versions of the given user 
+                question to retrieve relevant documents from a vector  database. 
+                By generating multiple perspectives on the user question, 
+                your goal is to help the user overcome some of the limitations 
+                of distance-based similarity search. Provide these alternative 
+                questions separated by newlines. Original question: {question}"""
+
+        self.prompt = ChatPromptTemplate.from_template(template_1)
+        self.llm = ChatOpenAI(temperature=0.0)
+        chain = LLMChain(llm=self.llm, prompt=self.prompt)
+        queries = chain.run(query)
+        queries = ast.literal_eval(queries)
+        queries = [item.replace(","," ") for item in queries.values()]
+        return queries
 
     def youtube_summarizer(self, urls):
         self.llm = ChatOpenAI(temperature=0.0)

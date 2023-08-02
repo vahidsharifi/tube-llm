@@ -50,12 +50,16 @@ class Loader:
         return self.data
 
     def load_from_youtube(self, video_id: str = "Unzc731iCUY", 
-                          query: str = None, num_videos: int = 3,
+                          query: list = None, num_videos: int = 2,
                           **kwargs) -> List[Document]:
         if query is not None:
-            tool = YouTubeSearchTool()
-            urls = ast.literal_eval(tool.run(query + f" , {num_videos}"))
+            urls = []
             self.data = []
+            tool = YouTubeSearchTool()
+            for item in query:
+                urls.extend(ast.literal_eval(tool.run(item + f" , {num_videos}")))
+            urls = set(urls)
+            print(len(urls))
             for url in urls:
                 video_id = self.extract_video_id(url)
                 loader = YoutubeLoader(language=self.languages, video_id=video_id)

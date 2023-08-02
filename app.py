@@ -36,7 +36,8 @@ async def answer_question(question: str):
 
     print("Received query:", question)
     chain = Chain()
-    QUESTION = chain.input_query_modifier(question)
+    # QUESTION = chain.input_query_modifier(question) # Single query search in youtube
+    QUESTION = chain.input_query_modifier_multi(question) # Multi query search in youtube
     print("modified query:", QUESTION)
 
     # Load, Transform, Store, Retrieve
@@ -51,32 +52,32 @@ async def answer_question(question: str):
     vectore_store = store.store_data(splits=data_splits)
 
 
-    # # Youtube Question Answering Multi Query Retriever
-    # # Retriever
-    # ret = Retriever(vectore_store=vectore_store)
-    # documents = ret.get_multi_query(question=QUESTION)
-    # qa = QuestionAnswering()
-    # answer_results, sources = qa.ask_multi_query(documents=documents, question=question)
-    # # Return the results as JSON
-    # response = {
-    #     "question": [question],
-    #     "modified_question": [QUESTION],
-    #     "answer": [answer_results['output_text']],
-    #     "sources": sources
-    # }
-
-
-    # Youtube Question Answering Simple Retriever
+    # Youtube Question Answering Multi Query Retriever
+    # Retriever
+    ret = Retriever(vectore_store=vectore_store)
+    documents = ret.get_multi_query(question=QUESTION)
     qa = QuestionAnswering()
-    answer_results = qa.ask(question=question, vector_store=vectore_store)
-
+    answer_results, sources = qa.ask_multi_query(documents=documents, question=question)
     # Return the results as JSON
     response = {
         "question": [question],
         "modified_question": [QUESTION],
-        "answer": [answer_results['result']],
-        "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
+        "answer": [answer_results['output_text']],
+        "sources": sources
     }
+
+
+    # # Youtube Question Answering Simple Retriever
+    # qa = QuestionAnswering()
+    # answer_results = qa.ask(question=question, vector_store=vectore_store)
+    #
+    # # Return the results as JSON
+    # response = {
+    #     "question": [question],
+    #     "modified_question": [QUESTION],
+    #     "answer": [answer_results['result']],
+    #     "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
+    # }
 
     # chain = Chain()
     # summaries = chain.youtube_summarizer(response["sources"][0])
