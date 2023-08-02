@@ -55,7 +55,6 @@ class Loader:
         if query is not None:
             tool = YouTubeSearchTool()
             urls = ast.literal_eval(tool.run(query + f" , {num_videos}"))
-            print(urls)
             self.data = []
             for url in urls:
                 video_id = self.extract_video_id(url)
