@@ -69,7 +69,6 @@ async def answer_question(question: str):
     # Youtube Question Answering Simple Retriever
     qa = QuestionAnswering()
     answer_results = qa.ask(question=question, vector_store=vectore_store)
-    # Your existing code ends here
 
     # Return the results as JSON
     response = {
@@ -78,7 +77,10 @@ async def answer_question(question: str):
         "answer": [answer_results['result']],
         "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
     }
-    
+
+    # chain = Chain()
+    # summaries = chain.youtube_summarizer(response["sources"][0])
+    # print(summaries)
 
 
 

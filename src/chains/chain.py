@@ -1,6 +1,9 @@
 from langchain.prompts import ChatPromptTemplate
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
+from src import Loader, Transformer
+from langchain.chains.summarize import load_summarize_chain
+
 
 class Chain:
     def __init__(self):
@@ -44,5 +47,24 @@ class Chain:
         chain = LLMChain(llm=self.llm, prompt=self.prompt)
         return chain.run(query).replace(",", " ") #Replacing the comma with spaces due to YouTubeSearchTool documentation
 
+    def youtube_summarizer(self, urls):
+        self.llm = ChatOpenAI(temperature=0.0)
+        summaries = []
+        split = Transformer()
+        loader = Loader()
+        for url in urls:
+            video_id = url.replace("https://www.youtube.com/watch?v=", "", 1)
+            data = loader.load_from_youtube(video_id=video_id)
+            docs = split.split_data(data)
+            chain = load_summarize_chain(llm=self.llm, chain_type='refine')
+            summary = chain.run(docs)
+            summaries.append(summary)
+        return summaries
 
-# from langchain.retrievers.multi_query import MultiQueryRetriever
+
+
+
+
+
+
+
