@@ -32,52 +32,81 @@ async def read_index():
 
 # Wrap your existing code into a FastAPI route
 @app.get("/answer/")
-async def answer_question(question: str):
-
+async def answer_question(question: str, performance: str = "normal"):
     print("Received query:", question)
     chain = Chain()
-    # QUESTION = chain.input_query_modifier(question) # Single query search in youtube
-    QUESTION = chain.input_query_modifier_multi(question) # Multi query search in youtube
-    print("modified query:", QUESTION)
-
-    # Load, Transform, Store, Retrieve
     loader = Loader()
-    data = loader.load_from_youtube(query=QUESTION)
-    print(f"{len(data)} DOCUMENTS LOADED")
-
     split = Transformer()
-    data_splits = split.split_data(data)
-
     store = Store()
-    vectore_store = store.store_data(splits=data_splits)
+
+    if performance == "basic": # Original Query - Simple Retriever - Simple Search Query
+        QUESTION = question.replace(',', ' ')
+        data = loader.load_from_youtube(query=[QUESTION])
+        data_splits = split.split_data(data)
+        print(f"{len(data)} DOCUMENTS LOADED")
+        vectore_store = store.store_data(splits=data_splits)
+        qa = QuestionAnswering()
+        answer_results = qa.ask(question=question, vector_store=vectore_store)
+        response = {
+            "question": [question],
+            "modified_question": [QUESTION],
+            "answer": [answer_results['result']],
+            "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
+        }
+
+    elif performance == "fast": # Modified Query - Simple Retriever - Simple Search Query
+        QUESTION = chain.input_query_modifier(question)  # Single query search in youtube
+        print("modified query:", QUESTION)
+        data = loader.load_from_youtube(query=QUESTION)
+        data_splits = split.split_data(data)
+        print(f"{len(data)} DOCUMENTS LOADED")
+        vectore_store = store.store_data(splits=data_splits)
+        qa = QuestionAnswering()
+        answer_results = qa.ask(question=question, vector_store=vectore_store)
+        response = {
+            "question": [question],
+            "modified_question": [QUESTION],
+            "answer": [answer_results['result']],
+            "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in
+                                 answer_results['source_documents']))]
+        }
+
+    elif performance == "normal": # Modified Query - Simple Retriever - Multiple Search Query
+        QUESTION = chain.input_query_modifier_multi(question)  # Multi query search in youtube
+        print("modified query:", QUESTION)
+        data = loader.load_from_youtube(query=QUESTION)
+        data_splits = split.split_data(data)
+        print(f"{len(data)} DOCUMENTS LOADED")
+        vectore_store = store.store_data(splits=data_splits)
+        qa = QuestionAnswering()
+        answer_results = qa.ask(question=question, vector_store=vectore_store)
+        response = {
+            "question": [question],
+            "modified_question": [QUESTION],
+            "answer": [answer_results['result']],
+            "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in
+                                 answer_results['source_documents']))]}
+
+    else: # Modified Query - Multiple Retriever - Multiple Search Query
+        QUESTION = chain.input_query_modifier_multi(question) # Multi query search in youtube
+        print("modified query:", QUESTION)
+        data = loader.load_from_youtube(query=QUESTION)
+        print(f"{len(data)} DOCUMENTS LOADED")
+        data_splits = split.split_data(data)
+        vectore_store = store.store_data(splits=data_splits)
+        ret = Retriever(vectore_store=vectore_store)
+        documents = ret.get_multi_query(question=QUESTION)
+        qa = QuestionAnswering()
+        answer_results, sources = qa.ask_multi_query(documents=documents, question=question)
+        response = {
+            "question": [question],
+            "modified_question": [QUESTION],
+            "answer": [answer_results['output_text']],
+            "sources": sources
+        }
 
 
-    # Youtube Question Answering Multi Query Retriever
-    # Retriever
-    ret = Retriever(vectore_store=vectore_store)
-    documents = ret.get_multi_query(question=QUESTION)
-    qa = QuestionAnswering()
-    answer_results, sources = qa.ask_multi_query(documents=documents, question=question)
-    # Return the results as JSON
-    response = {
-        "question": [question],
-        "modified_question": [QUESTION],
-        "answer": [answer_results['output_text']],
-        "sources": sources
-    }
 
-
-    # # Youtube Question Answering Simple Retriever
-    # qa = QuestionAnswering()
-    # answer_results = qa.ask(question=question, vector_store=vectore_store)
-    #
-    # # Return the results as JSON
-    # response = {
-    #     "question": [question],
-    #     "modified_question": [QUESTION],
-    #     "answer": [answer_results['result']],
-    #     "sources": [list(set("https://www.youtube.com/watch?v=" + source.metadata['source'] for source in answer_results['source_documents']))]
-    # }
 
     # chain = Chain()
     # summaries = chain.youtube_summarizer(response["sources"][0])

@@ -5,9 +5,10 @@ from langchain.chains.question_answering import load_qa_chain
 
 
 template = """Use the following pieces of context to answer the question at the end. 
-If you don't know the answer, just say that you don't know, don't try to make up an answer.\
 Use six sentences maximum and keep the answer as concise as possible. Please note that\
-the language of question and Helpful Answer should be the same. 
+the language of question and Helpful Answer should be the same.\
+
+Please note that if you don't know the answer, just say that you don't know, don't try to make up an answer.\
 
 Context:{context}
 
