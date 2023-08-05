@@ -5,7 +5,6 @@
     <title>Tube-LLM</title>
     <link rel="stylesheet" href="/static/styles.css">
     <style>
-        /* Add your custom CSS styles here */
         .answer-box {
             background-color: #f5f5f5;
             border: 1px solid #ccc;
@@ -22,19 +21,18 @@
             border-radius: 5px;
         }
 
-        /* Loading logo style */
         .loading-logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100px; /* Adjust the height as needed */
+            height: 100px;
         }
 
         .loading-logo {
             display: block;
-            width: 50px; /* Adjust the size of the loading GIF */
-            height: 50px; /* Adjust the size of the loading GIF */
-            background-image: url("/static/loading.png"); /* Add a slash (/) to indicate the root directory */
+            width: 50px;
+            height: 50px;
+            background-image: url("/static/loading.png");
             background-size: cover;
             animation: spin 1s linear infinite;
         }
@@ -49,8 +47,6 @@
             }
         }
     </style>
-
-    <!-- Preload the loading.png file -->
     <link rel="preload" href="/static/loading.png" as="image">
 </head>
 
@@ -60,23 +56,22 @@
         Welcome to our innovative search engine. Simply input your question below and our system will return detailed answers curated from various YouTube sources. You'll also receive links to the original YouTube videos for further exploration. Enhance your knowledge with ease and convenience, all in one place.
     </p>
     <div>
-        <!-- Specify the action and method for the form -->
         <form id="questionForm">
+            <label for="searchType">Search Type:</label>
+            <select name="searchType" id="searchType" onchange="updatePerformanceOptions()">
+                <option value="youtube" selected>YouTube Search</option>
+                <option value="web">Web Search</option>
+            </select>
             <label for="performance">Performance:</label>
             <select name="performance" id="performance">
-                <option value="basic">Basic</option>
-                <option value="fast">Fast</option>
-                <option value="normal" selected>Normal</option>
-                <option value="precise">Precise</option>
+                <!-- Options will be populated by JavaScript -->
             </select>
             <label for="question">Enter your question:</label>
             <input type="text" id="question" name="question" />
             <button type="submit">Get Answer</button>
-            <!-- Add the loading logo here -->
             <span class="loading-logo" id="loadingLogo" style="display: none;"></span>
         </form>
     </div>
-    <!-- New boxes for answer and sources -->
     <div class="answer-box" id="answerSection" style="display: none;">
         <h2>Answer:</h2>
         <p id="answer"></p>
@@ -87,44 +82,67 @@
     </div>
 
     <script>
-        document.getElementById("questionForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission behavior
+    function updatePerformanceOptions() {
+        const searchType = document.getElementById("searchType").value;
+        const performanceSelect = document.getElementById("performance");
+        performanceSelect.innerHTML = '';
 
-            const question = document.getElementById("question").value;
-            const performance = document.getElementById("performance").value;
+        if (searchType === 'youtube') {
+            const options = ['basic', 'fast', 'normal', 'precise'];
+            options.forEach(option => {
+                const opt = document.createElement("option");
+                opt.value = option;
+                opt.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+                if (option === 'fast') opt.selected = true;
+                performanceSelect.appendChild(opt);
+            });
+        } else {
+            const opt = document.createElement("option");
+            opt.value = 'default';
+            opt.textContent = 'Default';
+            performanceSelect.appendChild(opt);
+        }
+    }
 
-            // Show loading logo while waiting for the response
-            const loadingLogo = document.getElementById("loadingLogo");
-            loadingLogo.style.display = "inline-block";
+    updatePerformanceOptions();
 
-            fetch(`/answer/?question=${question}&performance=${performance}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    // Handle the API response data here (e.g., display the answer and sources)
-                    document.getElementById("answer").innerText = data.answer[0]; // Access first element of answer array
-                    const sourcesList = document.getElementById("sources");
-                    sourcesList.innerHTML = ''; // Clear existing sources
-                    data.sources[0].forEach(source => { // Access first element of sources array
-                        const li = document.createElement("li");
-                        const a = document.createElement("a");
-                        a.href = source;
-                        a.textContent = source;
-                        li.appendChild(a);
-                        sourcesList.appendChild(li);
-                    });
-                    document.getElementById("answerSection").style.display = "block";
-                    document.getElementById("sourcesSection").style.display = "block";
+    document.getElementById("questionForm").addEventListener("submit", function (event) {
+        event.preventDefault();
 
-                    // Hide the loading logo once the response is received
-                    loadingLogo.style.display = "none";
-                })
-                .catch((error) => {
-                    console.error("Error fetching answer:", error);
-                    // Hide the loading logo in case of an error
-                    loadingLogo.style.display = "none";
+        const question = document.getElementById("question").value;
+        const performance = document.getElementById("performance").value;
+        const searchType = document.getElementById("searchType").value; // Get the selected search type
+
+        const loadingLogo = document.getElementById("loadingLogo");
+        loadingLogo.style.display = "inline-block";
+
+        // Include the searchType parameter in the fetch URL
+        fetch(`/answer/?question=${question}&performance=${performance}&searchType=${searchType}`)
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById("answer").innerText = data.answer[0];
+                const sourcesList = document.getElementById("sources");
+                sourcesList.innerHTML = '';
+                data.sources[0].forEach(source => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = source;
+                    a.textContent = source;
+                    a.target = "_blank";
+                    li.appendChild(a);
+                    sourcesList.appendChild(li);
                 });
-        });
-    </script>
+                document.getElementById("answerSection").style.display = "block";
+                document.getElementById("sourcesSection").style.display = "block";
+                loadingLogo.style.display = "none";
+            })
+            .catch((error) => {
+                console.error("Error fetching answer:", error);
+                loadingLogo.style.display = "none";
+            });
+    });
+</script>
+
 </body>
 
 </html>

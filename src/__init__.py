@@ -4,3 +4,4 @@ from .chains import Chain
 from .memory import Memory
 from .agents import Agent
 from .question_answering import QuestionAnswering
+from .tools import Tools

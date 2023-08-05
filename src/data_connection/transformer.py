@@ -5,7 +5,7 @@ from typing import List
 
 class Transformer:
     def __init__(self):
-        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
+        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
 
     def split_data(self, data: List[Document]) -> List[Document]:
         all_splits = self.text_splitter.split_documents(data)

@@ -43,10 +43,12 @@ class Loader:
             return input
         return None
 
-    def load_from_url(self, url: str = "https://lilianweng.github.io/posts/2023-06-23-agent/",
+    def load_from_url(self, urls: list = ["https://lilianweng.github.io/posts/2023-06-23-agent/"],
                       **kwargs) -> List[Document]:
-        self.loader = WebBaseLoader(url, **kwargs)
-        self.data = self.loader.load()
+        self.data = []
+        for url in urls:
+            self.loader = WebBaseLoader(url, **kwargs)
+            self.data.extend(self.loader.load())
         return self.data
 
     def load_from_youtube(self, video_id: str = "Unzc731iCUY", 
