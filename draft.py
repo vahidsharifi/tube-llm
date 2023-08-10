@@ -140,34 +140,37 @@ async def answer_question(question: str, performance: str = "fast", searchType: 
     elif searchType == "web":
         tool = Tools()
         # Code for handling web search
-        search = tool.duckduckgo_search(question, num_results=2)
-        # search
-        # print(search)
-        urls = [item['link'] for item in search]
-        data = loader.load_from_url(urls=urls)
-        data_splits = split.split_data(data)
-        # print(data_splits[10])
-        vectore_store = store.store_data(splits=data_splits)
-        qa = QuestionAnswering()
-        answer_results = qa.ask(question=question, vector_store=vectore_store)
-        response = {
-            "question": [question],
-            "modified_question": [question],
-            "answer": [answer_results['result']],
-            "sources": [list(set(source.metadata['source'] for source in
-                                 answer_results['source_documents']))]
-        }
-
-        print(response['answer'])
-        print(answer_results['source_documents'])
-
-        # QUESTION = chain.input_query_modifier(question)  # Multi query search in youtube
-        # search = tool.duckduckgo_search(QUESTION[0], num_results=2)
-        # print("modified query:", QUESTION)
+        # search = tool.duckduckgo_search(question, num_results=2)
+        # # search
+        # # print(search)
         # urls = [item['link'] for item in search]
+        # data = loader.load_from_url(urls=urls)
+        # data_splits = split.split_data(data)
+        # # print(data_splits[10])
+        # vectore_store = store.store_data(splits=data_splits)
+        # qa = QuestionAnswering()
+        # answer_results = qa.ask(question=question, vector_store=vectore_store)
+        # response = {
+        #     "question": [question],
+        #     "modified_question": [question],
+        #     "answer": [answer_results['result']],
+        #     "sources": [list(set(source.metadata['source'] for source in
+        #                          answer_results['source_documents']))]
+        # }
+        #
+        # print(response['answer'])
+        # print(answer_results['source_documents'])
+
+        QUESTION = chain.input_query_modifier(question)  # Multi query search in youtube
+        search = tool.duckduckgo_search(QUESTION[0], num_results=4)
+        print("modified query:", QUESTION)
+        print(search)
+        # urls = [item['link'] for item in search]
+        # print(urls)
         # data = loader.load_from_url(urls=urls)
         # print(f"{len(data)} DOCUMENTS LOADED")
         # data_splits = split.split_data(data)
+        # print(data_splits)
         # vectore_store = store.store_data(splits=data_splits)
         # ret = Retriever(vectore_store=vectore_store)
         # documents = ret.get_multi_query(question=QUESTION)

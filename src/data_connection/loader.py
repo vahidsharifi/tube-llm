@@ -47,8 +47,11 @@ class Loader:
                       **kwargs) -> List[Document]:
         self.data = []
         for url in urls:
-            self.loader = WebBaseLoader(url, **kwargs)
-            self.data.extend(self.loader.load())
+            try:
+                self.loader = WebBaseLoader(url, **kwargs)
+                self.data.extend(self.loader.load())
+            except:
+                continue
         return self.data
 
     def load_from_youtube(self, video_id: str = "Unzc731iCUY", 

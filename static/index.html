@@ -117,7 +117,8 @@
         loadingLogo.style.display = "inline-block";
 
         // Include the searchType parameter in the fetch URL
-        fetch(`/answer/?question=${question}&performance=${performance}&searchType=${searchType}`)
+        const encodedQuestion = encodeURIComponent(question);
+        fetch(`/answer/?question=${encodedQuestion}&performance=${performance}&searchType=${searchType}`)
             .then((response) => response.json())
             .then((data) => {
                 document.getElementById("answer").innerText = data.answer[0];
