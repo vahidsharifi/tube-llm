@@ -30,7 +30,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/", response_class=HTMLResponse)
 async def read_index():
     # Load using jinja2 templates
-    with open("static/index.html") as f:
+    with open("../static/index.html") as f:
         return f.read()
 
 
