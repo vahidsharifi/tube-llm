@@ -1,6 +1,7 @@
 from langchain.tools import DuckDuckGoSearchResults
 import ast
 
+
 class Tools:
 
     def __init__(self):
@@ -13,4 +14,5 @@ class Tools:
         return result
 
 
-
+if __name__ == "__main__":
+    Tools().duckduckgo_search()
