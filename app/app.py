@@ -23,3 +23,4 @@ async def read_index():
     INDEX_PATH = PROJECT_ROOT / "static" / "index.html"
     with open(INDEX_PATH) as f:
         return f.read()
+ 
