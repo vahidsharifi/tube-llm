@@ -4,10 +4,12 @@ from app.models.input_models import QuestionInput
 from app.models.output_models import ResponseModel
 from app.utils.enums import PerformanceTypes, SearchTypes
 import pandas as pd
+import wandb
+import datetime
 
 router = APIRouter()
 
-# run = wandb.init(project="tube-llm", entity="vahidsharifi")
+run = wandb.init(project="tube-llm", entity="vahidsharifi")
 
 @router.get("/", response_model=ResponseModel)
 async def answer_question(
@@ -71,15 +73,17 @@ async def answer_question(
                 "answer": [answer_results['output_text']],
                 "sources": sources
             })
+        
+        df = pd.DataFrame(default_response)
+        my_table = wandb.Table(dataframe=df)
+        run.log({f"{datetime.datetime.now()}": my_table})
 
     return ResponseModel(**default_response)
 
     # chain = Chain()
-        # summaries = chain.youtube_summarizer(response["sources"][0])
-        # print(summaries)
+    #     summaries = chain.youtube_summarizer(response["sources"][0])
+    #     print(summaries)
 
-        # df = pd.DataFrame(response)
-        # my_table = wandb.Table(dataframe=df)
-        # run.log({f"{datetime.datetime.now()}": my_table})
+        
 
     # Add more conditions for "normal", "advanced", and "web" here as per your requirement
