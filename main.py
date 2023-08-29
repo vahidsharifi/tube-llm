@@ -16,13 +16,9 @@ app.add_middleware(CORSMiddleware, allow_origins=origins, allow_methods=["*"], a
 # Define the project root and mount the static files directory
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="static")
-app.include_router(answer_router, prefix="/answer", tags=["Answer"])
+app.include_router(answer_router, prefix="", tags=["Answer"])
 
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-
-    # INDEX_PATH = "index.html"
-    # with open(INDEX_PATH) as f:
-    #     return f.read()

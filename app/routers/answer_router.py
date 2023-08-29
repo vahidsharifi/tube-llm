@@ -9,9 +9,10 @@ import datetime
 
 router = APIRouter()
 
+
 # run = wandb.init(project="tube-llm", entity="vahidsharifi")
 
-@router.get("/", response_model=ResponseModel)
+@router.get("/answer", response_model=ResponseModel)
 async def answer_question(
         question: str = Query(...),
         performance: PerformanceTypes = Query(PerformanceTypes.fast),
@@ -40,7 +41,10 @@ async def answer_question(
 
         elif performance == PerformanceTypes.fast:
             QUESTION = chain.input_query_modifier(question)
+            print(f"Modified Query: {QUESTION}")
+
             data = loader.load_from_youtube(query=QUESTION)
+            print(f"Loaded Data: {data}")
 
         elif performance == PerformanceTypes.normal:
             QUESTION = chain.input_query_modifier_multi(question)
@@ -51,6 +55,7 @@ async def answer_question(
             data = loader.load_from_youtube(query=QUESTION)
 
         data_splits = split.split_data(data)
+        print(f"DATA SPLITS: {data_splits}")
         vectore_store = store.store_data(splits=data_splits)
 
         if performance in [PerformanceTypes.basic, PerformanceTypes.fast, PerformanceTypes.normal]:
@@ -73,8 +78,8 @@ async def answer_question(
                 "answer": [answer_results['output_text']],
                 "sources": sources
             })
-        
-        df = pd.DataFrame(default_response)
+
+        # df = pd.DataFrame(default_response)
         # my_table = wandb.Table(dataframe=df)
         # run.log({f"{datetime.datetime.now()}": my_table})
 
@@ -83,7 +88,5 @@ async def answer_question(
     # chain = Chain()
     #     summaries = chain.youtube_summarizer(response["sources"][0])
     #     print(summaries)
-
-        
 
     # Add more conditions for "normal", "advanced", and "web" here as per your requirement
