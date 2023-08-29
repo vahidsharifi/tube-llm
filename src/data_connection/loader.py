@@ -9,6 +9,7 @@ from typing import List
 import re
 from urllib.parse import urlparse, parse_qs
 
+
 class Loader:
     def __init__(self):
         self.loader = None
@@ -54,7 +55,7 @@ class Loader:
                 continue
         return self.data
 
-    def load_from_youtube(self, video_id: str = "Unzc731iCUY", 
+    def load_from_youtube(self, video_id: str = "Unzc731iCUY",
                           query: list = None, num_videos: int = 2,
                           **kwargs) -> List[Document]:
         if query is not None:
@@ -64,11 +65,17 @@ class Loader:
             for item in query:
                 urls.extend(ast.literal_eval(tool.run(item + f" , {num_videos}")))
             urls = set(urls)
-            print(len(urls))
+            print(len(urls), urls)
+
             for url in urls:
                 video_id = self.extract_video_id(url)
+                print(f"VIDEO_ID: {video_id}")
+
                 loader = YoutubeLoader(language=self.languages, video_id=video_id)
-                self.data.extend(loader.load())
+                loaded_data = loader.load()
+                print(f"LOADED_YOU: {loaded_data}")
+
+                self.data.extend(loaded_data)
         else:
             self.loader = YoutubeLoader(video_id=video_id, **kwargs)
             self.data = self.loader.load()

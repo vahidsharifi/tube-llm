@@ -51,37 +51,39 @@
 </head>
 
 <body>
-    <h1>Tube-LLM</h1>
-    <p id="description">
-        Welcome to our innovative search engine. Simply input your question below and our system will return detailed answers curated from various YouTube sources. You'll also receive links to the original YouTube videos for further exploration. Enhance your knowledge with ease and convenience, all in one place.
-    </p>
-    <div>
-        <form id="questionForm">
-            <label for="searchType">Search Type:</label>
-            <select name="searchType" id="searchType" onchange="updatePerformanceOptions()">
-                <option value="youtube" selected>YouTube Search</option>
-                <option value="web">Web Search</option>
-            </select>
-            <label for="performance">Performance:</label>
-            <select name="performance" id="performance">
-                <!-- Options will be populated by JavaScript -->
-            </select>
-            <label for="question">Enter your question:</label>
-            <input type="text" id="question" name="question" />
-            <button type="submit">Get Answer</button>
-            <span class="loading-logo" id="loadingLogo" style="display: none;"></span>
-        </form>
-    </div>
-    <div class="answer-box" id="answerSection" style="display: none;">
-        <h2>Answer:</h2>
-        <p id="answer"></p>
-    </div>
-    <div class="sources-box" id="sourcesSection" style="display: none;">
-        <h2>Sources:</h2>
-        <ul id="sources"></ul>
-    </div>
+<h1>Tube-LLM</h1>
+<p id="description">
+    Welcome to our innovative search engine. Simply input your question below and our system will return detailed
+    answers curated from various YouTube sources. You'll also receive links to the original YouTube videos for further
+    exploration. Enhance your knowledge with ease and convenience, all in one place.
+</p>
+<div>
+    <form id="questionForm">
+        <label for="searchType">Search Type:</label>
+        <select name="searchType" id="searchType" onchange="updatePerformanceOptions()">
+            <option value="youtube" selected>YouTube Search</option>
+            <option value="web">Web Search</option>
+        </select>
+        <label for="performance">Performance:</label>
+        <select name="performance" id="performance">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+        <label for="question">Enter your question:</label>
+        <input type="text" id="question" name="question"/>
+        <button type="submit">Get Answer</button>
+        <span class="loading-logo" id="loadingLogo" style="display: none;"></span>
+    </form>
+</div>
+<div class="answer-box" id="answerSection" style="display: none;">
+    <h2>Answer:</h2>
+    <p id="answer"></p>
+</div>
+<div class="sources-box" id="sourcesSection" style="display: none;">
+    <h2>Sources:</h2>
+    <ul id="sources"></ul>
+</div>
 
-    <script>
+<script>
     function updatePerformanceOptions() {
         const searchType = document.getElementById("searchType").value;
         const performanceSelect = document.getElementById("performance");
@@ -119,7 +121,11 @@
         // Include the searchType parameter in the fetch URL
         const encodedQuestion = encodeURIComponent(question);
         console.log(`${window.location.protocol}//${window.location.host}`)
-        fetch(`${window.location.protocol}//${window.location.host}/answer/?question=${encodedQuestion}&performance=${performance}&searchType=${searchType}`)
+        protocol = "https:"
+        if (window.location.host === "127.0.0.1:8000") {
+            protocol = "http:"
+        }
+        fetch(`${protocol}//${window.location.host}/answer/?question=${encodedQuestion}&performance=${performance}&searchType=${searchType}`)
             .then((response) => response.json())
             .then((data) => {
                 document.getElementById("answer").innerText = data.answer[0];
