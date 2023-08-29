@@ -118,7 +118,8 @@
 
         // Include the searchType parameter in the fetch URL
         const encodedQuestion = encodeURIComponent(question);
-        fetch(`/answer/?question=${encodedQuestion}&performance=${performance}&searchType=${searchType}`)
+        console.log(`${window.location.protocol}//${window.location.host}`)
+        fetch(`${window.location.protocol}//${window.location.host}/answer/?question=${encodedQuestion}&performance=${performance}&searchType=${searchType}`)
             .then((response) => response.json())
             .then((data) => {
                 document.getElementById("answer").innerText = data.answer[0];
