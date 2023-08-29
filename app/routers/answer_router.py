@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Query
+from fastapi.responses import JSONResponse
 from src import Loader, Transformer, Store, Retriever, Chain, Tools, QuestionAnswering
 from app.models.input_models import QuestionInput
 from app.models.output_models import ResponseModel
@@ -30,7 +31,7 @@ async def answer_question(
         "answer": None,
         "sources": None
     }
-
+    # return ResponseModel()
     if searchType == SearchTypes.youtube:
 
         qa = QuestionAnswering()
