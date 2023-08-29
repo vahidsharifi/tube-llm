@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tube-LLM</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .answer-box {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .sources-box {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .loading-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+        }
+
+        .loading-logo {
+            display: block;
+            width: 50px;
+            height: 50px;
+            background-image: url("/static/loading.png");
+            background-size: cover;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <link rel="preload" href="/static/loading.png" as="image">
+</head>
+
+<body>
+    <h1>Tube-LLM</h1>
+    <p id="description">
+        Welcome to our innovative search engine. Simply input your question below and our system will return detailed answers curated from various YouTube sources. You'll also receive links to the original YouTube videos for further exploration. Enhance your knowledge with ease and convenience, all in one place.
+    </p>
+    <div>
+        <form id="questionForm">
+            <label for="searchType">Search Type:</label>
+            <select name="searchType" id="searchType" onchange="updatePerformanceOptions()">
+                <option value="youtube" selected>YouTube Search</option>
+                <option value="web">Web Search</option>
+            </select>
+            <label for="performance">Performance:</label>
+            <select name="performance" id="performance">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+            <label for="question">Enter your question:</label>
+            <input type="text" id="question" name="question" />
+            <button type="submit">Get Answer</button>
+            <span class="loading-logo" id="loadingLogo" style="display: none;"></span>
+        </form>
+    </div>
+    <div class="answer-box" id="answerSection" style="display: none;">
+        <h2>Answer:</h2>
+        <p id="answer"></p>
+    </div>
+    <div class="sources-box" id="sourcesSection" style="display: none;">
+        <h2>Sources:</h2>
+        <ul id="sources"></ul>
+    </div>
+
+    <script>
+    function updatePerformanceOptions() {
+        const searchType = document.getElementById("searchType").value;
+        const performanceSelect = document.getElementById("performance");
+        performanceSelect.innerHTML = '';
+
+        if (searchType === 'youtube') {
+            const options = ['basic', 'fast', 'normal', 'precise'];
+            options.forEach(option => {
+                const opt = document.createElement("option");
+                opt.value = option;
+                opt.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+                if (option === 'fast') opt.selected = true;
+                performanceSelect.appendChild(opt);
+            });
+        } else {
+            const opt = document.createElement("option");
+            opt.value = 'default';
+            opt.textContent = 'Default';
+            performanceSelect.appendChild(opt);
+        }
+    }
+
+    updatePerformanceOptions();
+
+    document.getElementById("questionForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const question = document.getElementById("question").value;
+        const performance = document.getElementById("performance").value;
+        const searchType = document.getElementById("searchType").value; // Get the selected search type
+
+        const loadingLogo = document.getElementById("loadingLogo");
+        loadingLogo.style.display = "inline-block";
+
+        // Include the searchType parameter in the fetch URL
+        const encodedQuestion = encodeURIComponent(question);
+        fetch(`/answer/?question=${encodedQuestion}&performance=${performance}&searchType=${searchType}`)
+            .then((response) => response.json())
+            .then((data) => {
+                document.getElementById("answer").innerText = data.answer[0];
+                const sourcesList = document.getElementById("sources");
+                sourcesList.innerHTML = '';
+                data.sources[0].forEach(source => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    a.href = source;
+                    a.textContent = source;
+                    a.target = "_blank";
+                    li.appendChild(a);
+                    sourcesList.appendChild(li);
+                });
+                document.getElementById("answerSection").style.display = "block";
+                document.getElementById("sourcesSection").style.display = "block";
+                loadingLogo.style.display = "none";
+            })
+            .catch((error) => {
+                console.error("Error fetching answer:", error);
+                loadingLogo.style.display = "none";
+            });
+    });
+</script>
+
+</body>
+
+</html>

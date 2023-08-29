@@ -1,0 +1,50 @@
+body {
+    background-color: #f8f0f2; /* A soft pastel pink */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #4c3a61; /* Dark purple */
+    font-size: 4em; /* Doubles the size of the heading */
+}
+
+h2 {
+    color: #4c3a61; /* Dark purple */
+}
+
+div {
+    background-color: #e5d3f3; /* A soft pastel purple */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 60%; /* Gives a nice ratio */
+    margin-top: 30px; /* Increase this value to add more space */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin-top: 10px;
+    background-color: #b39cd0; /* Muted purple */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#description {
+    text-align: center;
+    color: #4c3a61; /* Dark purple */
+    font-size: 1.2em;
+}
