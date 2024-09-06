@@ -109,46 +109,46 @@
     updatePerformanceOptions();
 
     document.getElementById("questionForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+    event.preventDefault();
 
-        const question = document.getElementById("question").value;
-        const performance = document.getElementById("performance").value;
-        const searchType = document.getElementById("searchType").value;
+    const question = document.getElementById("question").value;
+    const performance = document.getElementById("performance").value;
+    const searchType = document.getElementById("searchType").value;
 
-        const loadingLogo = document.getElementById("loadingLogo");
-        loadingLogo.style.display = "inline-block";
+    const loadingLogo = document.getElementById("loadingLogo");
+    loadingLogo.style.display = "inline-block";
 
-        const protocol = window.location.protocol;
-        const host = window.location.host;
-        const url = new URL('/answer/', `${protocol}//${host}`);
-        url.searchParams.append('question', encodeURIComponent(question));
-        url.searchParams.append('performance', performance);
-        url.searchParams.append('searchType', searchType);
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    const url = new URL('/answer', `${protocol}//${host}`);
+    url.searchParams.append('question', question);  // No need for encodeURIComponent here
+    url.searchParams.append('performance', performance);
+    url.searchParams.append('searchType', searchType);
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("answer").innerText = data.answer[0];
-                const sourcesList = document.getElementById("sources");
-                sourcesList.innerHTML = '';
-                data.sources[0].forEach(source => {
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-                    a.href = source;
-                    a.textContent = source;
-                    a.target = "_blank";
-                    li.appendChild(a);
-                    sourcesList.appendChild(li);
-                });
-                document.getElementById("answerSection").style.display = "block";
-                document.getElementById("sourcesSection").style.display = "block";
-                loadingLogo.style.display = "none";
-            })
-            .catch(error => {
-                console.error("Error fetching answer:", error);
-                loadingLogo.style.display = "none";
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("answer").innerText = data.answer[0];
+            const sourcesList = document.getElementById("sources");
+            sourcesList.innerHTML = '';
+            data.sources[0].forEach(source => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = source;
+                a.textContent = source;
+                a.target = "_blank";
+                li.appendChild(a);
+                sourcesList.appendChild(li);
             });
-    });
+            document.getElementById("answerSection").style.display = "block";
+            document.getElementById("sourcesSection").style.display = "block";
+            loadingLogo.style.display = "none";
+        })
+        .catch(error => {
+            console.error("Error fetching answer:", error);
+            loadingLogo.style.display = "none";
+        });
+});
 </script>
 
 
