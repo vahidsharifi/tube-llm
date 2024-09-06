@@ -28,3 +28,4 @@ app.include_router(answer_router, prefix="", tags=["Answer"])
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
