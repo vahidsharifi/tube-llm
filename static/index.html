@@ -1,157 +1,303 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tube-LLM</title>
-    <link rel="stylesheet" href="/static/styles.css">
     <style>
-        .answer-box {
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #ff6b6b;
+            --background-color: #f7f9fc;
+            --text-color: #333;
+            --card-background: #ffffff;
+            --button-hover: #3a78c2;
         }
 
-        .sources-box {
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-        }
-
-        .loading-logo-container {
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
-            height: 100px;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background-color: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 20px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Flexbox container for logo and title */
+        .header {
+            display: flex;
+            align-items: center; /* Vertically center logo and text */
+            justify-content: center; /* Horizontally center both */
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 3rem;
+            margin-left: 20px; /* Add space between logo and text */
+        }
+
+        #description {
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-3px);
         }
 
         .loading-logo {
-            display: block;
             width: 50px;
             height: 50px;
-            background-image: url("/static/loading.png");
-            background-size: cover;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--secondary-color);
+            border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .answer-box, .sources-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+        }
+
+        .sources-box ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sources-box li {
+            margin-bottom: 10px;
+        }
+
+        .sources-box a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .sources-box a:hover {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 20px;
             }
 
-            100% {
-                transform: rotate(360deg);
+            h1 {
+                font-size: 2rem;
             }
         }
+
+        /* Horizontal Flip Custom Logo */
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: url('static/output-onlinepngtools.png') no-repeat center center;
+            background-size: cover;
+            animation: flip-logo 5s ease-out forwards;
+        }
+
+
+
     </style>
-    <link rel="preload" href="/static/loading.png" as="image">
 </head>
-
 <body>
-<h1>Tube-LLM</h1>
-<p id="description">
-    Welcome to our innovative search engine. Simply input your question below and our system will return detailed
-    answers curated from various YouTube sources. You'll also receive links to the original YouTube videos for further
-    exploration. Enhance your knowledge with ease and convenience, all in one place.
-</p>
-<div>
-    <form id="questionForm">
-        <label for="searchType">Search Type:</label>
-        <select name="searchType" id="searchType" onchange="updatePerformanceOptions()">
-            <option value="youtube" selected>YouTube Search</option>
-            <option value="web">Web Search</option>
-        </select>
-        <label for="performance">Performance:</label>
-        <select name="performance" id="performance">
-            <!-- Options will be populated by JavaScript -->
-        </select>
-        <label for="question">Enter your question:</label>
-        <input type="text" id="question" name="question"/>
-        <button type="submit">Get Answer</button>
-        <span class="loading-logo" id="loadingLogo" style="display: none;"></span>
-    </form>
-</div>
-<div class="answer-box" id="answerSection" style="display: none;">
-    <h2>Answer:</h2>
-    <p id="answer"></p>
-</div>
-<div class="sources-box" id="sourcesSection" style="display: none;">
-    <h2>Sources:</h2>
-    <ul id="sources"></ul>
-</div>
+    <div class="container">
+        <!-- Logo and Title Section -->
+        <div class="header">
+            <div class="logo" id="logo"></div>
+            <h1>Tube-LLM</h1>
+        </div>
 
-<script>
-    function updatePerformanceOptions() {
-        const searchType = document.getElementById("searchType").value;
-        const performanceSelect = document.getElementById("performance");
-        performanceSelect.innerHTML = '';
+        <p id="description">
+            Welcome to our innovative search engine. Input your question below and our system will return detailed
+            answers curated from various YouTube sources. Enhance your knowledge with ease and convenience, all in one place.
+        </p>
 
-        if (searchType === 'youtube') {
-            const options = ['basic', 'fast', 'normal', 'precise'];
-            options.forEach(option => {
+        <form id="questionForm">
+            <div>
+                <label for="searchType">Search Type:</label>
+                <select name="searchType" id="searchType" onchange="updatePerformanceOptions()">
+                    <option value="youtube" selected>YouTube Search</option>
+                    <option value="web">Web Search</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="performance">Performance:</label>
+                <select name="performance" id="performance">
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+
+            <div>
+                <label for="question">Enter your question:</label>
+                <input type="text" id="question" name="question" placeholder="Type your question here..."/>
+            </div>
+
+            <button type="submit">Get Answer</button>
+        </form>
+
+        <div class="loading-logo" id="loadingLogo"></div>
+
+        <div class="answer-box" id="answerSection" style="display: none;">
+            <h2>Answer:</h2>
+            <p id="answer"></p>
+        </div>
+
+        <div class="sources-box" id="sourcesSection" style="display: none;">
+            <h2>Sources:</h2>
+            <ul id="sources"></ul>
+        </div>
+    </div>
+
+    <script>
+        function updatePerformanceOptions() {
+            const searchType = document.getElementById("searchType").value;
+            const performanceSelect = document.getElementById("performance");
+            performanceSelect.innerHTML = '';
+
+            if (searchType === 'youtube') {
+                const options = ['basic', 'fast', 'normal', 'precise'];
+                options.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+                    if (option === 'fast') opt.selected = true;
+                    performanceSelect.appendChild(opt);
+                });
+            } else {
                 const opt = document.createElement("option");
-                opt.value = option;
-                opt.textContent = option.charAt(0).toUpperCase() + option.slice(1);
-                if (option === 'fast') opt.selected = true;
+                opt.value = 'default';
+                opt.textContent = 'Default';
                 performanceSelect.appendChild(opt);
-            });
-        } else {
-            const opt = document.createElement("option");
-            opt.value = 'default';
-            opt.textContent = 'Default';
-            performanceSelect.appendChild(opt);
+            }
         }
-    }
 
-    updatePerformanceOptions();
+        updatePerformanceOptions();
 
-    document.getElementById("questionForm").addEventListener("submit", function (event) {
-    event.preventDefault();
+        document.getElementById("questionForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-    const question = document.getElementById("question").value;
-    const performance = document.getElementById("performance").value;
-    const searchType = document.getElementById("searchType").value;
+            const question = document.getElementById("question").value;
+            const performance = document.getElementById("performance").value;
+            const searchType = document.getElementById("searchType").value;
 
-    const loadingLogo = document.getElementById("loadingLogo");
-    loadingLogo.style.display = "inline-block";
+            const loadingLogo = document.getElementById("loadingLogo");
+            const logo = document.getElementById("logo");
 
-    const protocol = window.location.protocol;
-    const host = window.location.host;
-    const url = new URL('/answer', `${protocol}//${host}`);
-    url.searchParams.append('question', question);  // No need for encodeURIComponent here
-    url.searchParams.append('performance', performance);
-    url.searchParams.append('searchType', searchType);
+            // Start spinning logo and show loading animation
+            logo.classList.remove('stop');
+            loadingLogo.style.display = "block";
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("answer").innerText = data.answer[0];
-            const sourcesList = document.getElementById("sources");
-            sourcesList.innerHTML = '';
-            data.sources[0].forEach(source => {
-                const li = document.createElement("li");
-                const a = document.createElement("a");
-                a.href = source;
-                a.textContent = source;
-                a.target = "_blank";
-                li.appendChild(a);
-                sourcesList.appendChild(li);
-            });
-            document.getElementById("answerSection").style.display = "block";
-            document.getElementById("sourcesSection").style.display = "block";
-            loadingLogo.style.display = "none";
-        })
-        .catch(error => {
-            console.error("Error fetching answer:", error);
-            loadingLogo.style.display = "none";
+            const protocol = window.location.protocol;
+            const host = window.location.host;
+            const url = new URL('/answer', `${protocol}//${host}`);
+            url.searchParams.append('question', question);
+            url.searchParams.append('performance', performance);
+            url.searchParams.append('searchType', searchType);
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("answer").innerText = data.answer[0];
+                    const sourcesList = document.getElementById("sources");
+                    sourcesList.innerHTML = '';
+                    data.sources[0].forEach(source => {
+                        const li = document.createElement("li");
+                        const a = document.createElement("a");
+                        a.href = source;
+                        a.textContent = source;
+                        a.target = "_blank";
+                        li.appendChild(a);
+                        sourcesList.appendChild(li);
+                    });
+                    document.getElementById("answerSection").style.display = "block";
+                    document.getElementById("sourcesSection").style.display = "block";
+
+                    // Stop logo spinning
+                    logo.classList.add('stop');
+                    loadingLogo.style.display = "none";
+                })
+                .catch(error => {
+                    console.error("Error fetching answer:", error);
+                    loadingLogo.style.display = "none";
+                });
         });
-});
-</script>
-
-
+    </script>
 </body>
-
 </html>
